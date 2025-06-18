@@ -10,7 +10,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "projects", "skills", "contact"]
+      const sections = ["home", "about", "experience", "projects", "skills", "contact"]
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -84,6 +84,36 @@ export default function Portfolio() {
     },
   ]
 
+  const experiences = [
+    {
+      title: "Cryptography Research and Development",
+      organization: "ECE Department, IIT Roorkee",
+      period: "April 2025 - Present",
+      description:
+        "Developing high-performance cryptographic libraries and secure computation systems with a focus on post-quantum and homomorphic encryption under the ECE Department.",
+      tech: ["SystemVerilog", "C++", "C", "Rust", "FPGA", "Cryptography", "FHE", "Secure ML"],
+      current: true,
+    },
+    {
+      title: "Project Fellow",
+      organization: "Advanced Robotics Lab, IITR",
+      period: "July 2024 - Feb 2025",
+      description:
+        "Collaborated on advanced research in control systems and automation under the mentorship of Dr. M. Felix Orlando (Senior IEEE Member). Reviewed academic literature and proposed improvements to robotic control strategies. Contributed to ongoing experiments involving multi-DOF robotic arms and autonomous behavior.",
+      tech: ["MATLAB", "Robotics", "Control Systems"],
+      current: false,
+    },
+    {
+      title: "E-Powertrain Engineer",
+      organization: "IIT Roorkee Motorsports",
+      period: "March 2024 - February 2024",
+      description:
+        "Worked in the electrical division of the official Formula Student racing team, focusing on the electrical drivetrain and power electronics. Designed a DC to 3-phase AC inverter PCB for the electric drivetrain and contributed to motor control strategies and battery interface design.",
+      tech: ["Power Electronics", "PCB Design", "PMSM"],
+      current: false,
+    },
+  ]
+
   const skills = [
     {
       category: "Cryptography & Security",
@@ -111,7 +141,7 @@ export default function Portfolio() {
           <div className="flex justify-between items-center">
             <div className="text-xl font-bold">Daksh Pandey</div>
             <div className="hidden md:flex space-x-8">
-              {["home", "about", "projects", "skills", "contact"].map((section) => (
+              {["home", "about", "experience", "projects", "skills", "contact"].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -144,7 +174,10 @@ export default function Portfolio() {
             <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Daksh Pandey
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 mb-8">Undergraduate Student at IIT Roorkee</p>
+            <p className="text-xl md:text-2xl text-slate-300 mb-4">
+              Cryptography + Hardware Security Researcher (Student)
+            </p>
+            <p className="text-lg text-slate-400 mb-8">IIT Roorkee</p>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
               Systems engineer focused on modern cryptography, digital design, and embedded systems. Building secure
               architectures from the ground up.
@@ -200,8 +233,50 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* Experience Section */}
+      <section id="experience" className="py-20 px-6 bg-slate-900/50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Experience</h2>
+          <div className="space-y-8">
+            {experiences.map((experience, index) => (
+              <Card
+                key={index}
+                className="bg-slate-800/50 border-slate-700 hover:bg-slate-800/70 transition-all duration-300"
+              >
+                <CardHeader>
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                    <div className="flex-1">
+                      <CardTitle className="text-xl text-slate-100 mb-1">{experience.title}</CardTitle>
+                      <p className="text-blue-400 font-medium mb-2">{experience.organization}</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      {experience.current && (
+                        <Badge variant="default" className="text-xs bg-green-600 hover:bg-green-700">
+                          Current
+                        </Badge>
+                      )}
+                      <span className="text-sm text-slate-400 whitespace-nowrap">{experience.period}</span>
+                    </div>
+                  </div>
+                  <CardDescription className="text-slate-300 leading-relaxed">{experience.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {experience.tech.map((tech, techIndex) => (
+                      <Badge key={techIndex} variant="outline" className="text-xs border-slate-600 text-slate-300">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 bg-slate-900/50">
+      <section id="projects" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Projects</h2>
           <div className="grid gap-8">
